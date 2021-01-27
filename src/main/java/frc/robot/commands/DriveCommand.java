@@ -37,7 +37,7 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     double left1 = -leftStick.getRawAxis(1);
     double left0 = -leftStick.getRawAxis(0);
-    double right0 = rightStick.getRawAxis(0);
+    double right0 = leftStick.getRawAxis(2);
 
     if(Math.abs(left1) < 0.05){
       left1 = 0;

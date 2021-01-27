@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Drive Test On/Off", false);
     SmartDashboard.putBoolean("Drive Test Left/Right", false);
 
+    
   }
 
   /**
@@ -56,6 +57,9 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     RobotContainer.drivetrainSubsystem.dashboardAngleEncoders();
+
+
+
   }
 
   /**
@@ -63,6 +67,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+
   }
 
   @Override
@@ -75,6 +80,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

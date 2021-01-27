@@ -78,14 +78,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
     //System.out.println("drive xSpeed:" + xSpeed + "\tySpeed:" + ySpeed);
     SwerveModuleState[] swerveModuleStates = kinematics.toSwerveModuleStates(
-        fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getAngle())
-        : new ChassisSpeeds(xSpeed, ySpeed, rot)
+        fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed * 4, ySpeed * 4, rot, getAngle())
+        : new ChassisSpeeds(xSpeed * 4, ySpeed * 4, rot)
     );
 
     SwerveDriveKinematics.normalizeWheelSpeeds(swerveModuleStates, Constants.SWERVE_MAX_VELOCITY);
 
     frontLeftModule.setDesiredState(swerveModuleStates[0]);
-    frontRightModule.setDesiredState(swerveModuleStates[1]);
+    //frontRightModule.setDesiredState(swerveModuleStates[1]);
     rearLeftModule.setDesiredState(swerveModuleStates[2]);
     rearRightModule.setDesiredState(swerveModuleStates[3]);
   }

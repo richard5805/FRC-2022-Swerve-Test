@@ -21,6 +21,7 @@ public final class NavX {
 
 
     public void reset() {
+        navX.zeroYaw();
         navX.reset();
     }
 
@@ -53,7 +54,7 @@ public final class NavX {
             case ROLL:
                 return Math.toRadians(navX.getRoll());
             case YAW:
-                return Math.toRadians(navX.getYaw());
+                return Math.toRadians(-navX.getYaw());
             default:
                 return 0.0;
         }
