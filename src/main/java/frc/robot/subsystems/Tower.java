@@ -23,12 +23,24 @@ public class Tower extends SubsystemBase {
     public Tower() {
         motorTower = new WPI_TalonSRX(Constants.TowerMotor);
         motorStorage = new WPI_TalonSRX(Constants.StorageMotor);
+        motorTower.configFactoryDefault();
+        motorStorage.configFactoryDefault();
+        
+        
         //tower and storage motor values
     }
 
-    public void percentIntakeMotor(double input){
+    public void percentMotor(double input){
         motorTower.set(ControlMode.PercentOutput, input);
         motorStorage.set(ControlMode.PercentOutput, input);
         //tower and storage speed
+    }
+
+    public void go(Boolean isGo) {
+        if(isGo){
+            percentMotor(0.5);
+        } else {
+            percentMotor(0);
+        }
     }
 }

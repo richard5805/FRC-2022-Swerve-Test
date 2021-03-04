@@ -29,8 +29,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
-
+  private Boomerangs roller;
+  private Tower tower;
+  private Shooter shooter;
+  private Joystick joy;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -41,11 +43,12 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-
+    roller = new Boomerangs();
+    tower = new Tower();
+    shooter = new Shooter();
+    joy = new Joystick(0);
     SmartDashboard.putBoolean("Drive Test On/Off", false);
     SmartDashboard.putBoolean("Drive Test Left/Right", false);
-
-    
   }
 
   /**
@@ -121,6 +124,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    Boolean isRoller = joy.getRawButton(1);
+    Boolean isShooter = joy.getRawButton(2);
+    Boolean isTower = joy.getRawButton(3);
+
+    roller.go(isRoller);
+    shooter.go(isShooter);
+    tower.go(isTower);
   }
 
   @Override

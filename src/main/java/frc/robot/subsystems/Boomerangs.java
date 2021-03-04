@@ -18,9 +18,18 @@ public class Boomerangs extends SubsystemBase {
 
     public Boomerangs() {
         motorIntake = new WPI_TalonSRX(Constants.IntakeMotor);
+        motorIntake.configFactoryDefault();
     }
 
-    public void percentIntakeMotor(double input){
+    public void percentMotor(double input){
         motorIntake.set(ControlMode.PercentOutput, input);
+    }
+
+    public void go(Boolean isGo) {
+        if(isGo){
+            percentMotor(0.5);
+        } else {
+            percentMotor(0);
+        }
     }
 }

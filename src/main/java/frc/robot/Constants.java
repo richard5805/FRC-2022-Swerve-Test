@@ -27,30 +27,30 @@ public final class Constants {
     public static final double RPM_TO_MPS = ((11.9/3.281)/(5676 / 60))/60;
 
     public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_MOTOR = 5;
-    public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_ENCODER = 0;
+    public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_ENCODER = 1;
     public static final int DRIVETRAIN_FRONT_LEFT_DRIVE_MOTOR = 6;
     public static final double DRIVETRAIN_FRONT_LEFT_ANGLE_OFFSET = Math.toRadians(165); //was -39
 
     public static final int DRIVETRAIN_FRONT_RIGHT_ANGLE_MOTOR = 7;
-    public static final int DRIVETRAIN_FRONT_RIGHT_ANGLE_ENCODER = 2;
+    public static final int DRIVETRAIN_FRONT_RIGHT_ANGLE_ENCODER = 0;
     public static final int DRIVETRAIN_FRONT_RIGHT_DRIVE_MOTOR = 8;
     public static final double DRIVETRAIN_FRONT_RIGHT_ANGLE_OFFSET = Math.toRadians(-90); //was -333
 
     public static final int DRIVETRAIN_REAR_LEFT_ANGLE_MOTOR = 4;
-    public static final int DRIVETRAIN_REAR_LEFT_ANGLE_ENCODER = 3;
+    public static final int DRIVETRAIN_REAR_LEFT_ANGLE_ENCODER = 2;
     public static final int DRIVETRAIN_REAR_LEFT_DRIVE_MOTOR = 3;
     public static final double DRIVETRAIN_REAR_LEFT_ANGLE_OFFSET = Math.toRadians(80); //was -348
 
-    public static final int DRIVETRAIN_REAR_RIGHT_ANGLE_MOTOR = 10;
-    public static final int DRIVETRAIN_REAR_RIGHT_ANGLE_ENCODER = 1;
-    public static final int DRIVETRAIN_REAR_RIGHT_DRIVE_MOTOR = 12;  
+    public static final int DRIVETRAIN_REAR_RIGHT_ANGLE_MOTOR = 12;
+    public static final int DRIVETRAIN_REAR_RIGHT_ANGLE_ENCODER = 3;
+    public static final int DRIVETRAIN_REAR_RIGHT_DRIVE_MOTOR = 10;  
     public static final double DRIVETRAIN_REAR_RIGHT_ANGLE_OFFSET = Math.toRadians(135); //was -282
 
     public static int IntakeMotor = 0;
-    public static int StorageMotor = 1;
-    public static int TowerMotor = 2;
-    public static int ShooterMotor1 = 3;
-    public static int ShooterMotor2 = 4;
+    public static int StorageMotor = 19;
+    public static int TowerMotor = 28;
+    public static int ShooterMotor1 = 12;
+    public static int ShooterMotor2 = 30;
     public static int ShooterServo = 5;
 
 }

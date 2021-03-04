@@ -25,6 +25,9 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         shooterMain = new WPI_TalonSRX(Constants.ShooterMotor1);
         shooterSide = new WPI_TalonSRX(Constants.ShooterMotor2);
+        shooterMain.configFactoryDefault();
+        shooterSide.configFactoryDefault();
+
         //setting values to shooter motors
         shooterMain.setInverted(true);
         //since they are side by side one needs to go the other way
@@ -32,7 +35,7 @@ public class Shooter extends SubsystemBase {
         //the thing that changes the angle
     }
 
-    public void percentShooterAngle(double input){
+    public void percentMotor(double input){
         shooterMain.set(ControlMode.PercentOutput, input);
         shooterSide.set(ControlMode.PercentOutput, input);
         //the speed in which it is going
@@ -48,7 +51,13 @@ public class Shooter extends SubsystemBase {
         //figure out what the high and low angles are and figure out how to put it in
     }
 
-
+    public void go(Boolean isGo) {
+        if(isGo){
+            percentMotor(0.5);
+        } else {
+            percentMotor(0);
+        }
+    }
 
     
 }
