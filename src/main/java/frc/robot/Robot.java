@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
     Boolean isTower = joy.getRawButton(3);
 
     roller.go(isRoller);
-    shooter.go(isShooter);
+    shooter.go(isTower);
     tower.go(isTower);
   }
 

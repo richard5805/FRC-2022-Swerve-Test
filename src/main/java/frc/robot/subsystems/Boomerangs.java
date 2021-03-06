@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -14,11 +14,12 @@ import frc.robot.RobotContainer;
 
 
 public class Boomerangs extends SubsystemBase {
-    private WPI_TalonSRX motorIntake;
+    private WPI_VictorSPX motorIntake;
 
     public Boomerangs() {
-        motorIntake = new WPI_TalonSRX(Constants.IntakeMotor);
+        motorIntake = new WPI_VictorSPX(Constants.IntakeMotor);
         motorIntake.configFactoryDefault();
+        motorIntake.setInverted(true);
     }
 
     public void percentMotor(double input){
