@@ -51,6 +51,6 @@ public final class Constants {
     public static int TowerMotor = 28;
     public static int ShooterMotor1 = 12;
     public static int ShooterMotor2 = 30;
-    public static int ShooterServo = 5;
+    public static int ShooterServo = 0;
 
 }

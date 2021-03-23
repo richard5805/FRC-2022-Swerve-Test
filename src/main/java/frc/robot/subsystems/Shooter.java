@@ -46,7 +46,7 @@ public class Shooter extends SubsystemBase {
     private int low;
     //the values of the high and low angles for the targets
 
-    public void servoThing(double angle){
+    public void moveServo(double angle){
         shooterAngle.setAngle(angle);
         //setting the angle- most of this is pretty self explanatory
         //figure out what the high and low angles are and figure out how to put it in
@@ -54,7 +54,7 @@ public class Shooter extends SubsystemBase {
 
     public void go(Boolean isGo) {
         if(isGo){
-            percentMotor(0.7);
+            percentMotor(0.8);
         } else {
             percentMotor(0);
         }

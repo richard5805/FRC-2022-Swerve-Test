@@ -19,7 +19,7 @@ public class Boomerangs extends SubsystemBase {
     public Boomerangs() {
         motorIntake = new WPI_VictorSPX(Constants.IntakeMotor);
         motorIntake.configFactoryDefault();
-        motorIntake.setInverted(true);
+        motorIntake.setInverted(false);
     }
 
     public void percentMotor(double input){
@@ -28,7 +28,7 @@ public class Boomerangs extends SubsystemBase {
 
     public void go(Boolean isGo) {
         if(isGo){
-            percentMotor(0.5);
+            percentMotor(0.8);
         } else {
             percentMotor(0);
         }

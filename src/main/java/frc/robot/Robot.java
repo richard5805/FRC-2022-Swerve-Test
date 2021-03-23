@@ -116,6 +116,8 @@ public class Robot extends TimedRobot {
     }
     m_robotContainer.driveCommand.schedule(false);
 
+    shooter.moveServo(0);
+
     //m_robotContainer.driveTest.schedule(false);
   }
 
@@ -124,12 +126,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    Boolean isRoller = joy.getRawButton(1);
-    Boolean isShooter = joy.getRawButton(2);
-    Boolean isTower = joy.getRawButton(3);
+    Boolean isRoller = joy.getRawAxis(3) >= 0.9;
+    Boolean isShooter = joy.getRawButton(6);
+    Boolean isTower = joy.getRawButton(5);
 
     roller.go(isRoller);
-    shooter.go(isTower);
+    shooter.go(isShooter);
     tower.go(isTower);
   }
 

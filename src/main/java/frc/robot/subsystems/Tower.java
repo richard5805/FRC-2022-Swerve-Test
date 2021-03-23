@@ -38,7 +38,7 @@ public class Tower extends SubsystemBase {
 
     public void go(Boolean isGo) {
         if(isGo){
-            percentMotor(0.5);
+            percentMotor(0.8);
         } else {
             percentMotor(0);
         }
