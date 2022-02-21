@@ -14,6 +14,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -23,16 +24,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  final Joystick leftStick = new Joystick(0);
-  final Joystick rightStick = new Joystick(1);
-  private JoystickButton zeroButton = new JoystickButton(leftStick, 8);
+  final PS4Controller controller = new PS4Controller(0);
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final ZeroFieldOrientedCommand zeroCommand = new ZeroFieldOrientedCommand(drivetrainSubsystem);
   
   public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
-  public final DriveCommand driveCommand = new DriveCommand(leftStick, rightStick, drivetrainSubsystem);
+  public final DriveCommand driveCommand = new DriveCommand(controller, drivetrainSubsystem);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -52,7 +51,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    zeroButton.whenPressed(zeroCommand);
+    // new Button(controller::getCircleButton)
+    //         // No requirements because we don't need to interrupt anything
+    //         .whenPressed(drivetrainSubsystem::zeroCommand);
     //driveCommand.schedule(false);
   }
 

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -17,14 +18,12 @@ public class DriveCommand extends CommandBase {
    * Creates a new DriveCommand.
    */
   DrivetrainSubsystem drivetrainSubsystem;
-  Joystick leftStick;
-  Joystick rightStick;
-  public DriveCommand(Joystick leftStick, Joystick rightStick, DrivetrainSubsystem drivetrainSubsystem) {
+  PS4Controller control;
+  public DriveCommand(PS4Controller control, DrivetrainSubsystem drivetrainSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrainSubsystem = drivetrainSubsystem;
     addRequirements(drivetrainSubsystem);
-    this.leftStick = leftStick;
-    this.rightStick = rightStick;
+    this.control = control;
   }
 
   // Called when the command is initially scheduled.
@@ -35,9 +34,9 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double left1 = -leftStick.getRawAxis(1);
-    double left0 = -leftStick.getRawAxis(0);
-    double right0 = leftStick.getRawAxis(4);
+    double left1 = control.getLeftX();
+    double left0 = control.getLeftY();
+    double right0 = control.getRightY();
 
     if(Math.abs(left1) < 0.05){
       left1 = 0;
