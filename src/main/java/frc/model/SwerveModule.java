@@ -7,6 +7,9 @@
 
 package frc.model;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANEncoder;
 
 /**
@@ -16,24 +19,26 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
+
+
 import frc.robot.Constants;
 
 public class SwerveModule {
 
-    CANSparkMax driveMotor;
-    CANSparkMax angleMotor;
+    WPI_TalonFX driveMotor;
+    WPI_TalonFX angleMotor;
 
-    CANEncoder driveEncoder;
-    AnalogInput angleEncoder;
+    TalonFX driveEncoder;
+    CANCoder angleEncoder;
 
     
     double angleOffset = 0.0;
@@ -44,14 +49,13 @@ public class SwerveModule {
       new TrapezoidProfile.Constraints(Constants.SWERVE_MAX_ANGULAR_VELOCITY, Constants.SWERVE_MAX_ANGULAR_ACCELERATION));
 
     public SwerveModule(int driveMotorChannel, int angleMotorChannel, int angleEncoderChannel, double angleOffset) {
-        driveMotor = new CANSparkMax(driveMotorChannel, MotorType.kBrushless);
-        angleMotor = new CANSparkMax(angleMotorChannel, MotorType.kBrushless);
+        driveMotor = new WPI_TalonFX(driveMotorChannel);
+        angleMotor = new WPI_TalonFX(angleMotorChannel);
 
-        driveMotor.restoreFactoryDefaults();
-        angleMotor.restoreFactoryDefaults();
+        driveMotor.configFactoryDefault();
+        angleMotor.configFactoryDefault();
 
-        driveEncoder = new CANEncoder(driveMotor);
-        angleEncoder = new AnalogInput(angleEncoderChannel);
+        angleEncoder = new CANCoder(angleEncoderChannel);
       
         this.angleOffset = angleOffset;
 
@@ -59,11 +63,11 @@ public class SwerveModule {
     }
 
     public SwerveModuleState getState() {
-        return new SwerveModuleState(driveEncoder.getVelocity() * Constants.RPM_TO_MPS, new Rotation2d((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI + angleOffset));
+        return new SwerveModuleState(driveMotor.getSelectedSensorVelocity() * Constants.RPM_TO_MPS, new Rotation2d((1.0 - angleEncoder.getBusVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI + angleOffset));
       }
 
     public double getAdjustedAngleEncoder() {
-      double offset = Math.toDegrees((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI + angleOffset);
+      double offset = Math.toDegrees((1.0 - angleEncoder.getBusVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI + angleOffset);
       if(offset > 180) {
         return offset - 360;
       } else if(offset < -180) {
@@ -90,7 +94,7 @@ public class SwerveModule {
         }
         //System.out.print("set: ");
 
-        double driveOutput = drivePIDController.calculate(driveEncoder.getVelocity() * Constants.RPM_TO_MPS, setSpeed);
+        double driveOutput = drivePIDController.calculate(driveMotor.getSelectedSensorVelocity() * Constants.RPM_TO_MPS, setSpeed);
         //System.out.println("DriveOutput: " + driveOutput);
         double angleOutput = anglePIDController.calculate(Math.toRadians(current), Math.toRadians(setAngle));
 
@@ -107,7 +111,7 @@ public class SwerveModule {
         //System.out.println("Module Number: " + angleEncoder.getChannel() + " driveOutput: " + driveOutput + " angleOutput: " + angleOutput);
         //SmartDashboard.putNumber("Module Number: " + angleEncoder.getChannel(), Math.toDegrees((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI));
         
-        SmartDashboard.putNumber("Module Number " + angleEncoder.getChannel() + " set angle", state.angle.getDegrees());
+        SmartDashboard.putNumber("Module Number " + angleEncoder.getDeviceID() + " set angle", state.angle.getDegrees());
         
         
         driveMotor.set(driveOutput);

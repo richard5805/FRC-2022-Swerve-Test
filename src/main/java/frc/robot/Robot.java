@@ -29,9 +29,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private Boomerangs roller;
-  private Tower tower;
-  private Shooter shooter;
+  // private Boomerangs roller;
+  // private Tower tower;
+  // private Shooter shooter;
   private Joystick joy;
 
   /**
@@ -43,9 +43,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    roller = new Boomerangs();
-    tower = new Tower();
-    shooter = new Shooter();
+    // roller = new Boomerangs();
+    // tower = new Tower();
+    // shooter = new Shooter();
     joy = new Joystick(0);
     SmartDashboard.putBoolean("Drive Test On/Off", false);
     SmartDashboard.putBoolean("Drive Test Left/Right", false);
@@ -116,8 +116,6 @@ public class Robot extends TimedRobot {
     }
     m_robotContainer.driveCommand.schedule(false);
 
-    shooter.moveServo(0);
-
     //m_robotContainer.driveTest.schedule(false);
   }
 
@@ -126,13 +124,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    Boolean isRoller = joy.getRawAxis(3) >= 0.9;
-    Boolean isShooter = joy.getRawButton(6);
-    Boolean isTower = joy.getRawButton(5);
+    // Boolean isRoller = joy.getRawAxis(3) >= 0.9;
+    // Boolean isShooter = joy.getRawButton(6);
+    // Boolean isTower = joy.getRawButton(5);
 
-    roller.go(isRoller);
-    shooter.go(isShooter);
-    tower.go(isTower);
+    // roller.go(isRoller);
+    // shooter.go(isShooter);
+    // tower.go(isTower);
   }
 
   @Override
